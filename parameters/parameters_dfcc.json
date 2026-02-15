@@ -1,0 +1,19 @@
+{
+    "version":"1.0",
+    "bank":"dfcc",
+    "url": "https://www.dfcc.lk/cards/credit-card-offers",
+    "subcategories": ["image-item","class","div","false"],
+    "view_offer_details": ["bIRM","class","div","false"],
+    "img_items": ["offerMainImage","class","img","false"],
+    "offer_img": ["","","",""],
+    "card": ["imageUpperText","class","p","false"],
+    "until": ["","","",""],
+    "phone": ["","","",""],
+    "saving": ["Offerpercentage","class","div","false"],
+    "vendor": ["cardOfferText","class","p","false"],
+    "items": ["cardOfferItem swiper-slide cardofferslide","class","div","false"],
+    "subitems_text": ["image-title","class","div","false"],
+    "subitems_link": ["image-link","class","a","false"],
+    "root_is_content": "true",
+    "root": "https://www.dfcc.lk/cards/"
+}

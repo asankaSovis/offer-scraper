@@ -1,0 +1,18 @@
+{
+    "version":"1.0",
+    "bank":"ndb",
+    "url": "https://www.ndbbank.com/cards/card-offers",
+    "subcategories": ["btn btn-outline-secondary card-offer m-1","class","a","false"],
+    "view_offer_details": ["View Offer Details","title","a","false"],
+    "img_items": ["card-img-top position-absolute offercompanylogo","class","img","false"],
+    "offer_img": ["card-img-top","class","img","false"],
+    "card": ["text-muted py-1","class","p","false"],
+    "until": ["offer-date py-2 mb-0","class","p","false"],
+    "phone": ["card-body","class","div","true"],
+    "saving": ["card-title ndbcolor","class","h5","false"],
+    "vendor": ["card-title","class","p","false"],
+    "items": ["col-12 col-md-6 col-lg-4 mb-5","class","div","false"],
+    "subitems_text": ["","","",""],
+    "subitems_link": ["","","",""],
+    "root_is_content": "true"
+}
