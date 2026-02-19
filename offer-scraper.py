@@ -1,5 +1,5 @@
 """
-Bank Card Offers Web Scraper
+Offer Scraper
 This module scrapes card offers from the Bank website, extracts offer details,
 validates the data, and stores it in JSON format for later retrieval and analysis.
 The scraper navigates through different card offer categories, extracts information
@@ -10,11 +10,13 @@ Args:
     -v [vendor_name] : Search and display offers for a specific vendor (case-insensitive)
     -c [category_name] : Search and display all offers in a specific category (case-insensitive)
     {For -v and -c, [vendor_name] and [category_name] can be left blank to list all}
+    -i : Prints about and license information
 Example:
-    python temp.py -v
-    python temp.py -v "cinnamon"
-    python temp.py -c "dining"
-    python temp.py -f
+    offer-scraper.py -v
+    offer-scraper.py -v "cinnamon"
+    offer-scraper.py -c "dining"
+    offer-scraper.py -f
+    offer-scraper.py -i
 Attributes:
     url (str): The main URL of Bank card offers page
     offers (dict): Nested dictionary storing all vendor offers organized by vendor and saving type
@@ -22,15 +24,18 @@ Attributes:
     found_vendors (list): List of all unique vendors found during scraping
     root (str): Root URL of the Bank website used for constructing relative links
 Functions:
+    extract_items: Extracts items from parameters
     extract_content: Parses HTML and extracts offer details from card offer elements
     extract_url: Extracts category URLs from the main offers page
     scrape: Performs HTTP GET request and returns HTML content
     print_vendor: Displays all offers for a specific vendor
     print_category: Displays all offers in a specific category
+    load_params: Load parameters
+    information: Prints information and about
 @author © Asanka Sovis
-@date 2026/02/15
-@version 1.0
-@note Requires internet connection for web scraping. Uses BeautifulSoup for HTML parsing.
+@date 2026/02/19
+@version 1.1
+@note Requires internet connection for web scraping. Uses BeautifulSoup for HTML parsing. For educational purposes only.
 """
 
 import os
@@ -40,7 +45,13 @@ import datetime
 from bs4 import BeautifulSoup
 import sys
 
-VERSION = "1.0"
+VERSION = "1.1"
+COPYRIGHT = "2026"
+AUTHOR = "Asanka Sovis (asankasovis.com)"
+DATE = "19-02-2026"
+LICENSE = "MIT"
+PROJ = "github.com/asankaSovis/offer-scraper"
+SUPPORTED_VERSIONS = ["1.0", "1.1"]
 
 #The URL to be scraped
 url = ""
@@ -282,7 +293,7 @@ def load_params():
                 parameters = json.load(file)
 
                 if ('version' in parameters.keys()):
-                    if (parameters['version'] != VERSION):
+                    if not (parameters['version'] in SUPPORTED_VERSIONS):
                         print("ERROR: Incorrect version of JSON!")
                         exit(1)
                 else:
@@ -308,12 +319,35 @@ def load_params():
         print("ERROR: 'parameters.json' file does not exist!")
         exit(1)
 
+def information():
+    print("A Python-based web scraper that extracts credit card offer information from bank websites, parses the data, and stores it in structured JSON format for analysis and retrieval.")
+    print("")
+    print("     -f : Delete existing JSON backup file and perform a fresh scrape")
+    print("     -v [vendor_name] : Search and display offers for a specific vendor (case-insensitive)")
+    print("     -c [category_name] : Search and display all offers in a specific category (case-insensitive)")
+    print("         {For -v and -c, [vendor_name] and [category_name] can be left blank to list all}")
+    print("     -i : Prints about and license information")
+    print("")
+    print(f"This program is licensed unde the {LICENSE} license:")
+    print("")
+    try:
+        with open("LICENSE", "r") as file:
+            print(file.read())
+    except:
+        print("???")
+    print("")
+    print(f"Find more info and support, visit: {PROJ}")
+    print("")
+
 if (__name__ == "__main__"):
     load_params()
 
-    print("**BANK CARD OFFERS SCRAPER**")
-    print("     " + datetime.datetime.now().isoformat(sep=' ', timespec='seconds'))
-    print("     " + url)
+    print(f"-- OFFER SCRAPER v{VERSION} ----------------------------------------------")
+    print("")
+    print(f"    - Copyright {COPYRIGHT}, {AUTHOR}")
+    print(f"    - Release: {DATE}")
+    print("    - Today: " + datetime.datetime.now().isoformat(sep=' ', timespec='seconds'))
+    print("    - URL: " + url)
     print()
 
     #exit(0)
@@ -346,6 +380,9 @@ if (__name__ == "__main__"):
             if len(sys.argv) > 2:
                 find_str = sys.argv[2]
             find_type = 1
+        elif sys.argv[1] == '-i':
+            information()
+            exit(0)
 
     if not os.path.exists("./offers"):
         try:
